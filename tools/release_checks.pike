@@ -137,6 +137,10 @@ int test_unicode() {
 int test_tzdata() {
   string timezones_html = Protocols.HTTP.
     get_url_data("http://www.iana.org/time-zones");
+  if (!timezones_html) {
+    write("Skipping timezone check due to missing info.\n");
+    return 0;
+  }
   string|zero found_version;
   string|zero found_date;
   // First try the 2026c markup.
